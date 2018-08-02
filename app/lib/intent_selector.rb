@@ -1,5 +1,4 @@
 require 'active_support/core_ext/string'
-
 class IntentSelector < RequestHandler
   attr_reader :response
   def initialize(request:)
@@ -15,7 +14,7 @@ class IntentSelector < RequestHandler
   attr_reader :request
 
   def set_response
-    @response = find_intent_class.constantize.response
+    @response = find_intent_class.constantize.get_response(request: request)
   end
 
   def find_intent_class

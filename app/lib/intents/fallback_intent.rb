@@ -1,0 +1,3 @@
+class FallbackIntent < BaseIntent
+
+end

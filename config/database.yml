@@ -1,8 +1,0 @@
-development:
-  adapter: postgresql
-  database: alexa_diatom_demo_dev
-  username: alexandr
-  password: s14039419
-  host: localhost
-  pool: 25
-  timeout: 5000

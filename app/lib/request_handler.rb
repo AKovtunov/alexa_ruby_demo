@@ -13,7 +13,6 @@ class RequestHandler
   attr_reader :request
 
   def set_response
-    puts request
     case request["type"]
     when "LaunchRequest"
       @response = "Welcome to your company assistant! How can I help you?"

@@ -1,9 +1,9 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'pry'
-require "#{__dir__}/app/lib/request_handler"
-# Dir[File.join(__dir__, 'app', '*', '*', '*.rb')].each { |file| require file }
-Dir["#{__dir__}/app/**/*.rb"].each { |f| load(f) }
+
+require_relative "app/lib/required_files.rb"
+
 post '/' do
   hash = JSON.parse(request.body.read)
   p hash
@@ -19,5 +19,5 @@ post '/' do
     }
   }.to_json
 
+
 end
-# "text": "Currently our company has #{acc_count} workers. Do you want to know something else?",
