@@ -1,7 +1,9 @@
 3.times do |t|
   Project.create(
     title: "Title #{t}",
-    budget: Random.rand(1000..10000)
+    budget: Random.rand(1000..10000),
+    created_at: DateTime.now,
+    updated_at: DateTime.now
   )
 end
 
@@ -10,12 +12,18 @@ end
     full_name: "Worker #{t}",
     last_checked_date: DateTime.now.next_day( Random.rand(0..1) ),
     project_id: Project.order(Arel.sql("RANDOM()")).limit(1).first.id,
-    role: ["manager", "developer", "designer", "admin", "director"][Random.rand(0..4)]
+    role: ["manager", "developer", "designer", "admin", "director"][Random.rand(0..4)],
+
+    created_at: DateTime.now,
+    updated_at: DateTime.now
   )
   Invoice.create(
     price: Random.rand(500..3000),
     account_id: acc.id,
-    closed: Random.rand(0..1)
+    closed: Random.rand(0..1),
+
+    created_at: DateTime.now,
+    updated_at: DateTime.now
   )
 end
 

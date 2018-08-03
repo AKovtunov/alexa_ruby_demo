@@ -14,11 +14,16 @@ class IntentSelector < RequestHandler
   attr_reader :request
 
   def set_response
-    @response = find_intent_class.constantize.get_response(request: request)
+    @response = find_intent_class.get_response(request: request)
   end
 
   def find_intent_class
-    request["intent"]["name"].classify
+    begin
+      class_name = request["intent"]["name"].classify.constantize
+    rescue
+      class_name = FallbackIntent
+    end
+    return class_name
   end
 
 end

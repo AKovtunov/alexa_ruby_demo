@@ -15,10 +15,23 @@ class RequestHandler
   def set_response
     case request["type"]
     when "LaunchRequest"
-      @response = "Welcome to your company assistant! How can I help you?"
+      @response = make_default_response_schema("Welcome to your company assistant! How can I help you?")
     when "IntentRequest"
       @response = IntentSelector.get_response(request: request)
     end
+  end
+
+  def make_default_response_schema(text)
+    {
+      "version": "1.0",
+      "response": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": text,
+        },
+        "shouldEndSession": false
+      }
+    }
   end
 
 end

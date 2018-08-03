@@ -6,18 +6,14 @@ require_relative "app/lib/required_files.rb"
 
 post '/' do
   hash = JSON.parse(request.body.read)
+  p "===================================================== REQUEST ================================================"
   p hash
-  response = RequestHandler.get_response(request: hash["request"])
-  {
-    "version": "1.0",
-    "response": {
-      "outputSpeech": {
-        "type": "PlainText",
-        "text": response,
-      },
-      "shouldEndSession": false
-    }
-  }.to_json
+  p "=============================================================================================================="
+  response = RequestHandler.get_response(request: hash["request"]).to_json
+  p "===================================================== RESPONSE ================================================"
+  p response
+  p "=============================================================================================================="
+  response
 
 
 end
