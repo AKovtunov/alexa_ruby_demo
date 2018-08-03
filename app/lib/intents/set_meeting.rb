@@ -1,4 +1,4 @@
-class SetMeeting < BaseIntent
+class SetMeeting < DialogIntent
   private
   def set_response
     new_project = Meeting.create(date: DateTime.parse(get_slot_value("date")))

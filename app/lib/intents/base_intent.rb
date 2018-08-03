@@ -1,12 +1,11 @@
 class BaseIntent
-  attr_reader :response, :should_end_session
+  attr_reader :response, :should_end_session, :response_schema
 
   def initialize(request:)
-    @request = request
-    @should_end_session = false
+    set_defaults(request)
     set_response
-    @response = apply_response_schema(response)
-    after_callback
+    set_response_schema
+    @response = response_schema
   end
 
   def self.get_response(request:)
@@ -16,12 +15,17 @@ class BaseIntent
   private
   attr_reader :request
 
-  def after_callback
-
+  def set_defaults(request)
+    @request = request
+    @should_end_session = false
   end
 
   def set_response
     @response = "Unfortuntely, I don't know this one yet. Try to say get help to get additional help."
+  end
+
+  def set_response_schema
+    @response_schema = default_schema
   end
 
   def get_slot_value(name)
@@ -37,7 +41,7 @@ class BaseIntent
     date.beginning_of_day .. date.end_of_day
   end
 
-  def apply_response_schema(response)
+  def default_schema
     {
       "version": "1.0",
       "response": {
