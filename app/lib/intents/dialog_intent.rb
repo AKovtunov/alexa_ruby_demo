@@ -28,7 +28,7 @@ class DialogIntent < BaseIntent
         "directives": [
           "type": "Dialog.Delegate",
           "updatedIntent": {
-            "name": "setProject",
+            "name": self.class.to_s.camelize(:lower),
             "confirmationStatus": "NONE",
             "slots": generate_slots
           }

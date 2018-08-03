@@ -13,8 +13,22 @@ describe GetEmployeeAmount do
 		}
   }
 
+  before do
+    10.times do |t|
+      Account.create(
+        full_name: "Worker #{t}",
+        last_checked_date: DateTime.now.next_day( Random.rand(0..1) ),
+        project_id: 1,
+        role: ["manager", "developer", "designer", "admin", "director"][Random.rand(0..4)],
+
+        created_at: DateTime.now,
+        updated_at: DateTime.now
+      )
+    end
+  end
+
   it "should return people from today" do
     count = Account.count
-    expect(GetEmployeeAmount.get_response(request: request)).to eql("Currently database of the company contains 100 accounts")
+    expect(GetEmployeeAmount.get_response(request: request)).to eql(ResponseSetter.default_schema_for_response("Currently database of the company contains 10 accounts"))
   end
 end

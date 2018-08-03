@@ -1,6 +1,29 @@
 require 'spec_helper'
 describe GetWorkingEmployeeAmount do
 
+  before do
+    10.times do |t|
+      Account.create(
+        full_name: "Worker #{t}",
+        last_checked_date: Time.now.utc,
+        project_id: 1,
+        role: ["manager", "developer", "designer", "admin", "director"][Random.rand(0..4)],
+        created_at: DateTime.now,
+        updated_at: DateTime.now
+      )
+    end
+    5.times do |t|
+      Account.create(
+        full_name: "Worker #{t}",
+        last_checked_date: Time.now.utc.next_day,
+        project_id: 1,
+        role: ["manager", "developer", "designer", "admin", "director"][Random.rand(0..4)],
+        created_at: DateTime.now,
+        updated_at: DateTime.now
+      )
+    end
+  end
+
   it "should return people from today" do
     request =
       {
@@ -10,14 +33,13 @@ describe GetWorkingEmployeeAmount do
     			"slots" => {
     				"date" => {
     					"name" => "date",
-    					"value" => Date.today.to_s,
+    					"value" =>Time.now.utc.to_s,
     					"confirmationStatus" => "NONE"
   				  }
   			  }
   		  }
       }
-    count = Account.where(last_checked_date: DateTime.now.beginning_of_day..DateTime.now.end_of_day).count
-    expect(GetWorkingEmployeeAmount.get_response(request: request)).to eql("On #{Date.today.to_s} we have #{count} of people checked in the system")
+    expect(GetWorkingEmployeeAmount.get_response(request: request)).to eql(ResponseSetter.default_schema_for_response("On #{Time.now.utc.to_s} we have 10 of people checked in the system"))
   end
 
   it "should return people from any date" do
@@ -33,14 +55,13 @@ describe GetWorkingEmployeeAmount do
           "slots" => {
             "date" => {
               "name" => "date",
-              "value" => Date.today.next_day.to_s,
+              "value" => Time.now.utc.next_day.to_s,
               "confirmationStatus" => "NONE"
             }
           }
         }
       }
-    count = Account.where(last_checked_date: DateTime.now.beginning_of_day.next_day .. DateTime.now.end_of_day.next_day).count
-    expect(GetWorkingEmployeeAmount.get_response(request: request)).to eql("On #{Date.today.next_day} we have #{count} of people checked in the system")
+    expect(GetWorkingEmployeeAmount.get_response(request: request)).to eql(ResponseSetter.default_schema_for_response("On #{Time.now.utc.next_day} we have 5 of people checked in the system"))
   end
 
   it "should return no people from old dates" do
@@ -62,7 +83,6 @@ describe GetWorkingEmployeeAmount do
           }
         }
       }
-    count = Account.where(last_checked_date: DateTime.parse("15/05/1995").beginning_of_day .. DateTime.parse("15/05/1995").end_of_day).count
-    expect(GetWorkingEmployeeAmount.get_response(request: request)).to eql("On #{Date.parse("15/05/1995")} we have #{count} of people checked in the system")
+    expect(GetWorkingEmployeeAmount.get_response(request: request)).to eql(ResponseSetter.default_schema_for_response("On #{Date.parse("15/05/1995")} we have 0 of people checked in the system"))
   end
 end
