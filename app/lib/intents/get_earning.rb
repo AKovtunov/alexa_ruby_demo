@@ -1,4 +1,4 @@
-class GetEarnings < BaseIntent
+class GetEarning < BaseIntent
   private
   def set_response
     project_sum = Project.sum(:budget)

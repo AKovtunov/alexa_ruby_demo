@@ -1,0 +1,53 @@
+!!!
+%html
+  %head
+    :css
+      table {
+          border-collapse: collapse;
+          width: 100%;
+      }
+
+      th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+      }
+
+      tr:hover {background-color:#f5f5f5;}
+  %body
+    %h2 Company Statistics
+
+    %table
+      %tr
+        %th Count of users
+        %th Count of invoices
+        %th Count of projects
+        %th Sum of invoices
+        %th Sum of opened invoices
+        %th Sum of closed invoices
+      %tr
+        %td= @presenter.user_count
+        %td= @presenter.invoice_count
+        %td= @presenter.project_count
+        %td= @presenter.invoice_sum
+        %td= @presenter.open_invoice_sum
+        %td= @presenter.closed_invoice_sum
+
+    %h3 Latest project
+    %table
+      %tr
+        %th Title
+        %th Created at
+        %th Budget, EUR
+      %tr
+        %td= @presenter.latest_project.title
+        %td= @presenter.latest_project.created_at
+        %td= @presenter.latest_project.budget
+    %h3 Latest meeting
+    %table
+      %tr
+        %th Topic
+        %th Date and time
+      %tr
+        %td= @presenter.latest_meeting.reason
+        %td= @presenter.latest_meeting.date

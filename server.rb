@@ -4,6 +4,8 @@ require 'pry'
 
 require_relative "app/lib/required_files.rb"
 
+set :views, Proc.new { File.join(root, "app/views") }
+
 post '/' do
   hash = JSON.parse(request.body.read)
   p "===================================================== REQUEST ================================================"
@@ -16,4 +18,9 @@ post '/' do
   response
 
 
+end
+
+get '/ui' do
+  @presenter = ViewPresenter.fetch_data
+  haml :index
 end

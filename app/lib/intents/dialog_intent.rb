@@ -2,6 +2,11 @@ class DialogIntent < BaseIntent
   private
   attr_reader :slots, :selected_schema, :slot_value_hash
 
+  def set_response
+    set_slots
+    work_on_dialog_steps
+  end
+
   def set_response_schema
     @response_schema = @selected_schema
   end
