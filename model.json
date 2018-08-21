@@ -1,0 +1,383 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "diatom demo",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "getEmployeeAmount",
+                    "slots": [],
+                    "samples": [
+                        "how many employees",
+                        "employee amount",
+                        "what is the amount of employees"
+                    ]
+                },
+                {
+                    "name": "getWorkingEmployeeAmount",
+                    "slots": [
+                        {
+                            "name": "date",
+                            "type": "AMAZON.DATE"
+                        }
+                    ],
+                    "samples": [
+                        "working employees on {date}",
+                        "how many employees are present on {date}",
+                        "how many employees are working on {date}",
+                        "how many employees are here on {date}",
+                        "how many employees are currently on workplace on {date}"
+                    ]
+                },
+                {
+                    "name": "getHelp",
+                    "slots": [],
+                    "samples": [
+                        "give me some help",
+                        "what can you do",
+                        "can you help",
+                        "commands",
+                        "help"
+                    ]
+                },
+                {
+                    "name": "setMeeting",
+                    "slots": [
+                        {
+                            "name": "date",
+                            "type": "AMAZON.DATE",
+                            "samples": [
+                                "it will be on {date}",
+                                "{date}"
+                            ]
+                        },
+                        {
+                            "name": "reason",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{reason}",
+                                "it is {reason}",
+                                "the reason is {reason}"
+                            ]
+                        },
+                        {
+                            "name": "time",
+                            "type": "AMAZON.TIME",
+                            "samples": [
+                                "at {time}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "set meeting on {date}",
+                        "make a meeting on {date}",
+                        "set meeting {date}",
+                        "set a meeting on {date}",
+                        "Can you set a meeting on {date}"
+                    ]
+                },
+                {
+                    "name": "getBudget",
+                    "slots": [],
+                    "samples": [
+                        "what is our income",
+                        "what is our current budget",
+                        "What is our budget"
+                    ]
+                },
+                {
+                    "name": "getProjects",
+                    "slots": [],
+                    "samples": [
+                        "project amount",
+                        "how many projects do we have"
+                    ]
+                },
+                {
+                    "name": "getEarnings",
+                    "slots": [],
+                    "samples": [
+                        "Earnings",
+                        "what is our earnings value",
+                        "tell me current earnings",
+                        "Can you tell me our current earnings"
+                    ]
+                },
+                {
+                    "name": "setProject",
+                    "slots": [
+                        {
+                            "name": "name",
+                            "type": "AMAZON.SearchQuery",
+                            "samples": [
+                                "{name}",
+                                "it is {name}",
+                                "project should be called {name}",
+                                "the name of a project is {name}"
+                            ]
+                        },
+                        {
+                            "name": "budget",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{budget}",
+                                "it is {budget}",
+                                "it will be {budget}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "Set a project",
+                        "Make a new project",
+                        "Create a new project"
+                    ]
+                },
+                {
+                    "name": "getInvoiceSum",
+                    "slots": [
+                        {
+                            "name": "type",
+                            "type": "invoiceType",
+                            "samples": [
+                                "{type}",
+                                "It is {type} invoices"
+                            ]
+                        },
+                        {
+                            "name": "date",
+                            "type": "AMAZON.DATE",
+                            "samples": [
+                                "{date}",
+                                "on {date}",
+                                "For {date}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "Can you tell me our invoice sum",
+                        "Can you tell me sum of invoices",
+                        "What is our invoice sum"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "invoiceType",
+                    "values": [
+                        {
+                            "id": "0",
+                            "name": {
+                                "value": "closed",
+                                "synonyms": [
+                                    "close"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "1",
+                            "name": {
+                                "value": "total",
+                                "synonyms": [
+                                    "totals"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "2",
+                            "name": {
+                                "value": "open",
+                                "synonyms": [
+                                    "opened"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "setProject",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "name",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1510623450070.1303648579631"
+                            }
+                        },
+                        {
+                            "name": "budget",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1510623450070.1333167778069"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setMeeting",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "date",
+                            "type": "AMAZON.DATE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.624719180427.1326284463773"
+                            }
+                        },
+                        {
+                            "name": "reason",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1253078714699.561339120502"
+                            }
+                        },
+                        {
+                            "name": "time",
+                            "type": "AMAZON.TIME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.948469415076.1163001177365"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getInvoiceSum",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "type",
+                            "type": "invoiceType",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1206256452684.1156991875212"
+                            }
+                        },
+                        {
+                            "name": "date",
+                            "type": "AMAZON.DATE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1206256452684.498381083005"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.1510623450070.1303648579631",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "how should I call the project"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "what is the name of a project"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1510623450070.1333167778069",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "can you please specify a budget"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "what will the be budget"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1253078714699.561339120502",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "lets set a reason of this meeting"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "can you specify a reason of this meeting"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "what will be a reason of this meeting"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.624719180427.1326284463773",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the date?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1206256452684.1156991875212",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Is it open invoices, closed or total ones?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1206256452684.498381083005",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "For which month do you want to receive the information"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.948469415076.1163001177365",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "At what time?"
+                    }
+                ]
+            }
+        ]
+    }
+}
